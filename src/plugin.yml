@@ -4,10 +4,10 @@ version: 0.1
 author: BasiqDevs
 description: Simple way to freeze players
 commands:
-  title:
-    description: Manage Titles
-    usage: /<command> <help>
+  freeze:
+    description: Freezes target player
+    usage:Uasage: /freeze <player>
 permissions:
-  sgtitles.list:
+  basiqfreeze.freeze:
     default: op
     description: Freezes target player
