@@ -13,6 +13,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class BasiqFreezeCommands implements CommandExecutor {
@@ -84,6 +85,7 @@ public class BasiqFreezeCommands implements CommandExecutor {
 				sender.sendMessage("That player does not exist or is offline!");
 				return true;
 			}
+			if (sender.isOp() || sender.hasPermission("basiqfreeze.freeze"))
 			try {
 				if (BasiqFreezeManager.FreezePlayer(target)) {
 					String receive = target.getName();
@@ -109,7 +111,7 @@ public class BasiqFreezeCommands implements CommandExecutor {
 		if (args[0].equalsIgnoreCase(label) || checkPerm((Player) sender, perm))
 			return true;
 		else
-			sender.sendMessage("Not enough perms");
+			
 		return false;
 	}
 }
