@@ -24,7 +24,7 @@ public final class BasiqFreeze extends JavaPlugin {
 	
 	private void createTables() {
 		// Create Titles Table
-		sql.createTable("CREATE TABLE if not exists frozen (name TEXT NOT NULL);");
+		sql.createTable("CREATE TABLE if not exists frozen (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL);");
 	}
 
 	private void startListeners() {
@@ -36,7 +36,7 @@ public final class BasiqFreeze extends JavaPlugin {
 	public void onEnable() {
 		PluginDescriptionFile pdf = this.getDescription();
 		
-		sql = new SQLite(logger, "[ " + pdf.getName() + "]", getDataFolder().getPath() ,"titles");
+		sql = new SQLite(logger, "[ " + pdf.getName() + "]", getDataFolder().getPath() ,"frozen");
 		
 		sql.open();
 		
