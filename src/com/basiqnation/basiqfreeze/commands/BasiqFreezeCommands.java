@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.basiqnation.basiqfreeze.BasiqFreeze;
 import com.basiqnation.basiqfreeze.BasiqFreezeManager;
+import com.basiqnation.basiqfreeze.freeze.Freeze;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -85,6 +86,12 @@ public class BasiqFreezeCommands implements CommandExecutor {
 			}
 			try {
 				if (BasiqFreezeManager.FreezePlayer(target)) {
+					String receive = target.getName();
+					if (Freeze.isFrozen(target)){
+					sender.sendMessage("Freezing "+receive);
+					}else{
+						sender.sendMessage("UnFreezing "+receive);
+					}
 				} else {
 					sender.sendMessage("That title does not exist or that player already has it!");
 				}

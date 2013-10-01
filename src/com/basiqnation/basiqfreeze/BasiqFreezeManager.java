@@ -20,7 +20,6 @@ public class BasiqFreezeManager {
 				try {
 					BasiqFreeze.sql.query("INSERT INTO frozen (name) VALUES ('"
 							+ pName + "')");
-					freezee.sendMessage("Freezing " + pName);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -29,7 +28,6 @@ public class BasiqFreezeManager {
 			} else {
 				BasiqFreeze.sql.query("DELETE FROM frozen WHERE name='" + pName
 						+ "'");
-				freezee.sendMessage("UnFreezing " + pName);
 				return true;
 			}
 
