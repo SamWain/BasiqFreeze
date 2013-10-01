@@ -1,5 +1,7 @@
 package com.basiqnation.basiqfreeze;
 
+import java.sql.SQLException;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,10 +17,11 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerMove(final PlayerMoveEvent event) {
+	public void onPlayerMove(final PlayerMoveEvent event) throws SQLException {
 		Player player = event.getPlayer();
 		Location current = event.getFrom();
 		Location move = event.getTo();
+		BasiqFreezeManager.Freeze(player, current, move);
 
 	}
 }
