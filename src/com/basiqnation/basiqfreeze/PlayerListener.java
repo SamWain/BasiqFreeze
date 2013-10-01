@@ -3,23 +3,22 @@ package com.basiqnation.basiqfreeze;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.Listener;
-
-
-
-
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.Location;
 
 public class PlayerListener implements Listener {
 	public static BasiqFreeze plugin;
-	
-	public PlayerListener (BasiqFreeze instance) {
+
+	public PlayerListener(BasiqFreeze instance) {
 		plugin = instance;
 	}
-	
+
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerDamage(final PlayerJoinEvent event) {
+	public void onPlayerMove(final PlayerMoveEvent event) {
 		Player player = event.getPlayer();
-		
+		Location current = event.getFrom();
+		Location move = event.getTo();
+
 	}
 }

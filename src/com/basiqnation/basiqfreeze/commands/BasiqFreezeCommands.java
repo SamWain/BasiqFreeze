@@ -1,6 +1,8 @@
 package com.basiqnation.basiqfreeze.commands;
 
 
+import java.io.IOException;
+
 import com.basiqnation.basiqfreeze.BasiqFreeze;
 
 import org.bukkit.Bukkit;
@@ -71,8 +73,8 @@ public class BasiqFreezeCommands implements CommandExecutor {
 		if (freezeCommand("freeze", args, sender, "freeze")) {
 			cmdName = "Freeze";
 			cmdDesc = "Freezes or unfreezes a player";
-			cmdUsage = "/title freeze <user>";
-			if (args.length != 1 || args[1].equalsIgnoreCase("?")) {
+			cmdUsage = "/freeze <user>";
+			if (args[1].equalsIgnoreCase("?")) {
 				displayCmdHelp((Player) sender);
 				return true;
 			}
@@ -81,16 +83,18 @@ public class BasiqFreezeCommands implements CommandExecutor {
 				sender.sendMessage("That player does not exist or is offline!");
 				return true;
 			}
-			return true;
+			sender.sendMessage("Success!");
+			
 		}
 		return true;
 	}
 	
 		private boolean freezeCommand(String label, String[] args,
 				CommandSender sender, String perm) {
-			if (args[0].equalsIgnoreCase(label) && checkPerm((Player) sender, perm))
+			if (args[0].equalsIgnoreCase(label) || checkPerm((Player) sender, perm))
 				return true;
 			else
+				sender.sendMessage("Not enough perms");
 				return false;
 		}
 	}
