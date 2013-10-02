@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.bukkit.entity.Player;
-import org.bukkit.Location;
 
 import com.basiqnation.basiqfreeze.BasiqFreeze;
 

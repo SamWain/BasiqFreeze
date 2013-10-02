@@ -2,13 +2,9 @@ package com.basiqnation.basiqfreeze;
 
 import java.sql.SQLException;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.Location;
-import com.basiqnation.basiqfreeze.PlayerListener;
 import com.basiqnation.basiqfreeze.freeze.Freeze;
-import org.bukkit.event.player.PlayerMoveEvent;
 
 public class BasiqFreezeManager {
 

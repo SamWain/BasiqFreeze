@@ -1,6 +1,5 @@
 package com.basiqnation.basiqfreeze.commands;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import com.basiqnation.basiqfreeze.BasiqFreeze;
@@ -11,9 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class BasiqFreezeCommands implements CommandExecutor {
