@@ -2,6 +2,7 @@ name: BasiqFreeze
 main: com.basiqnation.basiqfreeze.BasiqFreeze
 version: 1.0
 author: BasiqDevs
+depend: [Vault]
 description: Simple way to freeze players
 commands:
   freeze:
