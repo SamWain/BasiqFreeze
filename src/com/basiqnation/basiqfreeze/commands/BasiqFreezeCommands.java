@@ -86,10 +86,13 @@ public class BasiqFreezeCommands implements CommandExecutor {
 			try {
 				if (BasiqFreezeManager.FreezePlayer(target)) {
 					String receive = target.getName();
+					String admin = sender.getName();
 					if (Freeze.isFrozen(target)){
 					sender.sendMessage("Freezing "+receive);
+					target.sendMessage("You have been frozen by "+admin);
 					}else{
-						sender.sendMessage("UnFreezing "+receive);
+						sender.sendMessage("Unfreezing "+receive);
+						target.sendMessage("You have been unfrozen");
 					}
 				} else {
 					sender.sendMessage("That title does not exist or that player already has it!");
