@@ -1,17 +1,14 @@
 package com.basiqnation.basiqfreeze;
 
-import java.sql.SQLException;
-
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.Location;
-
-import com.basiqnation.basiqfreeze.freeze.Freeze;
 
 public class PlayerListener implements Listener {
 	public static BasiqFreeze plugin;
@@ -20,8 +17,11 @@ public class PlayerListener implements Listener {
 		plugin = instance;
 	}
 
+	
+
+	// Listens for player movement
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerMove(final PlayerMoveEvent event) throws SQLException {
+	public void onPlayerMove(final PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		Location current = event.getFrom();
 		Location move = event.getTo();
@@ -29,17 +29,29 @@ public class PlayerListener implements Listener {
 
 	}
 
+	// Cancel all damage dealt to frozen players
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerDamaged(final EntityDamageEvent event)
-			throws SQLException {
+	public void onPlayerDamaged(final EntityDamageEvent event) {
 		Entity entity = event.getEntity();
 		if ((entity instanceof Player)) {
 			Player damagee = ((Player) entity).getPlayer();
-			if (Freeze.isFrozen(damagee)) {
+			if (BasiqFreezeManager.isFrozen(damagee)) {
 				event.setCancelled(true);
 			}
 
 		}
 		return;
+	}
+
+	// stops players from breaking the environment whilst frozen
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onPlayerInteract(final PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		if (BasiqFreezeManager.isFrozen(player)) {
+			event.setCancelled(true);
+
+		}
+		return;
+
 	}
 }

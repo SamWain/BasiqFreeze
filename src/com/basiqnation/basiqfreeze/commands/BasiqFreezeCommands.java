@@ -1,10 +1,8 @@
 package com.basiqnation.basiqfreeze.commands;
 
-import java.sql.SQLException;
 
 import com.basiqnation.basiqfreeze.BasiqFreeze;
 import com.basiqnation.basiqfreeze.BasiqFreezeManager;
-import com.basiqnation.basiqfreeze.freeze.Freeze;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 public class BasiqFreezeCommands implements CommandExecutor {
+
 	public static BasiqFreeze plugin;
 	public static String cmdName = null;
 	public static String cmdDesc = null;
@@ -50,9 +49,14 @@ public class BasiqFreezeCommands implements CommandExecutor {
 	}
 
 	private void displayHelp(Player player) {
-		player.sendMessage("§5[§6 " + pluginName
-				+ " Help §5]§f--------------------------");
-		player.sendMessage("§f §b/freeze §3[user]");
+		if (player.isOp() || player.hasPermission("basiqfreeze.freeze")) {
+			player.sendMessage("§5[§6 " + pluginName
+					+ " Help §5]§f--------------------------");
+			player.sendMessage("§f §b/freeze §3[user]");
+		} else {
+			player.sendMessage("You do not have permission.");
+
+		}
 	}
 
 	@Override
@@ -83,25 +87,19 @@ public class BasiqFreezeCommands implements CommandExecutor {
 				return true;
 			}
 			if (sender.isOp() || sender.hasPermission("basiqfreeze.freeze"))
-			try {
 				if (BasiqFreezeManager.FreezePlayer(target)) {
 					String receive = target.getName();
 					String admin = sender.getName();
-					if (Freeze.isFrozen(target)){
-					sender.sendMessage("Freezing "+receive);
-					target.sendMessage("You have been frozen by "+admin);
-					}else{
-						sender.sendMessage("Unfreezing "+receive);
+					if (BasiqFreezeManager.isFrozen(target)) {
+						sender.sendMessage("Freezing " + receive);
+						target.sendMessage("You have been frozen by " + admin);
+					} else {
+						sender.sendMessage("Unfreezing " + receive);
 						target.sendMessage("You have been unfrozen");
 					}
 				} else {
 					sender.sendMessage("That title does not exist or that player already has it!");
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 		}
 		return true;
 	}
@@ -111,7 +109,7 @@ public class BasiqFreezeCommands implements CommandExecutor {
 		if (args[0].equalsIgnoreCase(label) || checkPerm((Player) sender, perm))
 			return true;
 		else
-			
-		return false;
+
+			return false;
 	}
 }

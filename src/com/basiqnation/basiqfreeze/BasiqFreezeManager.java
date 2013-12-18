@@ -1,45 +1,50 @@
 package com.basiqnation.basiqfreeze;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.bukkit.entity.*;
+
 import org.bukkit.Location;
-import com.basiqnation.basiqfreeze.freeze.Freeze;
 
-public class BasiqFreezeManager {
+public class BasiqFreezeManager{
 
-	public static Boolean FreezePlayer(Player freezee) throws SQLException {
+	private static ArrayList<String> pList = new ArrayList<String>();
+
+	public static void loadNames(ArrayList<String> Names){
+		pList = Names;
+	}
+	
+	public static ArrayList<String> getNames(){
+		return pList;
+	}
+	
+	
+	
+	public static Boolean FreezePlayer(Player freezee) {
 		String pName = freezee.getName();
+		if (pList.contains(pName)) {
+			pList.remove(pName);
+		} else {
+			pList.add(pName);
+		}
+		return true;
+	}
 
-		if (!(pName.isEmpty())) {
-			if (!(Freeze.isFrozen(freezee))) {
-				try {
-					BasiqFreeze.sql.query("INSERT INTO frozen (name) VALUES ('"
-							+ pName + "')");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return true;
-			} else {
-				BasiqFreeze.sql.query("DELETE FROM frozen WHERE name='" + pName
-						+ "'");
-				return true;
-			}
-
+	public static Boolean isFrozen(Player freezee) {
+		String pName = freezee.getName();
+		if (pList.contains(pName)) {
+			return true;
 		}
 		return false;
 	}
 
-	public static void Freeze(Player player, Location current, Location move)
-			throws SQLException {
-		if (Freeze.isFrozen(player)) {
+	// Stops frozen players from moving
+	public static void Freeze(Player player, Location current, Location move) {
+		if (isFrozen(player)) {
 			if (move != current) {
 				player.teleport(current);
 			}
 		}
 
 	}
-
-
 }
